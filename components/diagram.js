@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import ReactFlow, { removeElements, addEdge } from "react-flow-renderer";
+import Popup from "reactjs-popup";
 
 const onLoad = (reactFlowInstance) => reactFlowInstance.fitView();
 
@@ -140,7 +141,7 @@ const Diagram = () => {
   };
 
   return (
-    <div className="  h-screen">
+    <div className=" h-screen flex bg-gray-50">
       <ReactFlow
         elements={elements}
         onElementsRemove={onElementsRemove}
@@ -152,14 +153,23 @@ const Diagram = () => {
         onNodeMouseLeave={onNodeMouseLeave}
         onNodeContextMenu={onNodeContextMenu}
         deleteKeyCode={46}
-      >
-        <button
-          onClick={changeClassName}
-          style={{ position: "absolute", right: 10, top: 30, zIndex: 4 }}
+      ></ReactFlow>
+      <div className=" ">
+        <Popup
+          trigger={
+            <button className="w-20 h-20 rounded-full bg-blue-600 text-white m-4">
+              +
+            </button>
+          }
+          position="left top"
         >
-          change class name
-        </button>
-      </ReactFlow>
+          {(close) => (
+            <div className="bg-white w-96 h-[48rem] mt-8  shadow-lg p-4	">
+              <p className="font-medium">Starting Step</p>
+            </div>
+          )}
+        </Popup>
+      </div>
     </div>
   );
 };
